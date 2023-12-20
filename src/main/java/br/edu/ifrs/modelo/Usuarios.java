@@ -183,7 +183,7 @@ public class Usuarios {
             con = Conexao.pegarConexao();
             
             // Definir a sentença SQL
-            p = con.prepareStatement("select * from camisas where cpf = ?");
+            p = con.prepareStatement("select * from usuarios where cpf = ?");
             
             // Parametrizar a sentença SQL
             p.setString(1, this.cpf);
