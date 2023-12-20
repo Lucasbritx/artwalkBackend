@@ -206,7 +206,7 @@ public class Clientes {
                 this.setCep(rs.getString("cep"));
             }
         } catch (Exception e) {
-            throw new Exception("[Cliente.selecionarId] - Falha ao executar a operação de seleção pela chave primária no banco de dados: " + e.getMessage());
+            throw new Exception("[Clientes.selecionarId] - Falha ao executar a operação de seleção pela chave primária no banco de dados: " + e.getMessage());
         } finally {
             if (rs != null) rs.close();
             if (p != null) p.close();
