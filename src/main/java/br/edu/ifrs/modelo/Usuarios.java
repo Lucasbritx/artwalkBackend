@@ -121,7 +121,7 @@ public class Usuarios {
     }
     
     public Usuarios[] selecionar() throws Exception {
-        List<Usuarios> lista = new ArrayList();
+        List<Usuarios> lista = new ArrayList<>();
         Connection con = null;
         PreparedStatement p = null;
         ResultSet rs = null;
