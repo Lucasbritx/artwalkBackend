@@ -1,6 +1,6 @@
 package br.edu.ifrs.trabalhoartwalk;
 
-import br.edu.ifrs.trabalhoartwalk.resources.AuthService;
+//import br.edu.ifrs.trabalhoartwalk.resources.AuthService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
@@ -14,8 +14,9 @@ public class LoginResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(@HeaderParam("username") String username, @HeaderParam("password") String password) {
-        AuthService authService = new AuthService();
-        String token = authService.login(username, password);
+        //AuthService authService = new AuthService();
+        //String token = authService.login(username, password);
+        String token = "tokenfake";
 
         if (token != null) {
             // Se a autenticação for bem-sucedida, retorne o token JWT

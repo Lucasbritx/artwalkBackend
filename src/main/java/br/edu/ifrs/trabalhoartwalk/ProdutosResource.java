@@ -14,6 +14,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PUT;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("produtos")
 @RequestScoped
@@ -58,5 +61,23 @@ public class ProdutosResource {
     @PUT
     @Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+     /**
+     * Método DELETE para excluir um produto pelo ID.
+     * @param id ID do produto a ser excluído.
+     * @return Resposta de sucesso ou falha.
+     */
+    @DELETE
+    @Path("{id}")
+    @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response deleteProduto(@PathParam("id") String id) {
+        try {
+            Produtos produto = new Produtos();
+            produto.excluir(id);
+            return Response.ok().build(); 
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir o produto").build();
+        }
     }
 }

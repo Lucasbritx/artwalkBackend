@@ -39,12 +39,13 @@ public class ProdutoPedidoResource {
         
         try {
             ProdutoPedidoResource c = new ProdutoPedidoResource();
-            pedidos = c.selecionarTodos();
+            //pedidos = c.selecionarTodos();
         } catch (Exception e) {
             pedidos = new ProdutoPedidoResource[0];
         }
         
-        return g.toJson(pedidos);
+        //return g.toJson(pedidos);
+        return "";
     }
 
     /**

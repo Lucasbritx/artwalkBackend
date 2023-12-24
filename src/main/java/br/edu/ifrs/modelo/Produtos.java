@@ -68,7 +68,7 @@ public class Produtos {
         }
     }
 
-    public void excluir() throws Exception {
+    public void excluir(String id) throws Exception {
         Connection con = null;
         PreparedStatement p = null;
 
@@ -76,7 +76,7 @@ public class Produtos {
             con = Conexao.pegarConexao();
             p = con.prepareStatement("DELETE FROM produtos WHERE id = ?");
 
-            p.setInt(1, this.id);
+            p.setInt(1, Integer.parseInt(id));
 
             p.execute();
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class Produtos {
             if (con != null) con.close();
         }
 
-        return lista.toArray(new Produtos[0]);
+        return lista.toArray(Produtos[]::new);
     }
 
     public void selecionarId() throws Exception {

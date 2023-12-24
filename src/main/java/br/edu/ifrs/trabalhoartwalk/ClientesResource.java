@@ -5,6 +5,7 @@
 package br.edu.ifrs.trabalhoartwalk;
 
 import br.edu.ifrs.modelo.Clientes;
+import br.edu.ifrs.modelo.Produtos;
 import com.google.gson.Gson;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.UriInfo;
@@ -14,6 +15,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PUT;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("clientes")
 @RequestScoped
@@ -58,5 +62,23 @@ public class ClientesResource {
     @PUT
     @Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+    /**
+     * Método DELETE para excluir um produto pelo ID.
+     * @param id ID do produto a ser excluído.
+     * @return Resposta de sucesso ou falha.
+     */
+    @DELETE
+    @Path("{id}")
+    @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response deleteCliente(@PathParam("id") String id) {
+        try {
+            Clientes cliente = new Clientes();
+            cliente.excluir(id);
+            return Response.ok().build(); 
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir o cliente").build();
+        }
     }
 }

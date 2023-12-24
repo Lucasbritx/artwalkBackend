@@ -1,5 +1,6 @@
 package br.edu.ifrs.trabalhoartwalk;
 
+import br.edu.ifrs.modelo.Clientes;
 import br.edu.ifrs.modelo.Pedidos;
 import com.google.gson.Gson;
 import jakarta.ws.rs.core.Context;
@@ -10,6 +11,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PUT;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("pedidos")
 @RequestScoped
@@ -54,5 +58,24 @@ public class PedidosResource {
     @PUT
     @Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+    /**
+     * Método DELETE para excluir um pedido pelo numero.
+     * @param id numero do pedido a ser excluído.
+     * @return Resposta de sucesso ou falha.
+     */
+    @DELETE
+    @Path("{id}")
+    @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response deletePedido(@PathParam("id") String id) {
+        try {
+            Pedidos pedido = new Pedidos();
+            System.out.println(id);
+            pedido.excluir(id);
+            return Response.ok().build(); 
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir o pedido").build();
+        }
     }
 }

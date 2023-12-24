@@ -68,16 +68,16 @@ public void atualizar() throws Exception {
     }
 }
 
-// Delete an existing pedido
-public void excluir() throws Exception {
+public void excluir(String id) throws Exception {
     Connection con = null;
     PreparedStatement p = null;
 
     try {
         con = Conexao.pegarConexao();
         p = con.prepareStatement("DELETE FROM pedidos WHERE numero = ?");
+        System.out.println(id);
 
-        p.setInt(1, this.numero);
+        p.setInt(1, Integer.parseInt(id));
 
         p.execute();
     } catch (Exception e) {

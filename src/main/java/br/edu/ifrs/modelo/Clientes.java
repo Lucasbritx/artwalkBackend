@@ -112,7 +112,7 @@ public class Clientes {
         }
     }
 
-    public void excluir() throws Exception {
+    public void excluir(String id) throws Exception {
         Connection con = null;
         PreparedStatement p = null;
     
@@ -120,7 +120,7 @@ public class Clientes {
             con = Conexao.pegarConexao();
             p = con.prepareStatement("DELETE FROM clientes WHERE id = ?");
     
-            p.setInt(1, this.id);
+            p.setInt(1, Integer.parseInt(id));
     
             p.execute();
         } catch (Exception e) {

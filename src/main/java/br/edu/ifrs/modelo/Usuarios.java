@@ -89,25 +89,14 @@ public class Usuarios {
         }
     }
     
-    public void excluir() throws Exception {
+    public void excluir(String cpf) throws Exception {
         Connection con = null;
         PreparedStatement p = null;
 
         try {
-            // Informar qual o driver JDBC a ser utilizado
-            /*Class.forName("com.mysql.jdbc.Driver");*/
-            
-            // Abrir uma Conexão com o Banco de Dados
-            /*con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lojao", "root", "12345678");*/
-            
-            /* Abertura de Conexão com Classe Utilitária */
             con = Conexao.pegarConexao();
-            
-            // Definir a sentença SQL
             p = con.prepareStatement("delete from usuarios where cpf = ?");
-            
-            // Parametrizar a sentença SQL
-            p.setString(1, this.cpf);
+            p.setString(1, cpf);
             
             // Executar a operação
             p.execute();            

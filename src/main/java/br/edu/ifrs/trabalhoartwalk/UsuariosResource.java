@@ -4,6 +4,7 @@
  */
 package br.edu.ifrs.trabalhoartwalk;
 
+import br.edu.ifrs.modelo.Clientes;
 import br.edu.ifrs.modelo.Usuarios;
 import com.google.gson.Gson;
 import jakarta.ws.rs.core.Context;
@@ -14,6 +15,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PUT;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("usuarios")
 @RequestScoped
@@ -58,5 +62,23 @@ public class UsuariosResource {
     @PUT
     @Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+    /**
+     * Método DELETE para excluir um usuario pelo CPF.
+     * @param cpf ID do usuario a ser excluído.
+     * @return Resposta de sucesso ou falha.
+     */
+    @DELETE
+    @Path("{cpf}")
+    @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response deleteUsuario(@PathParam("cpf") String cpf) {
+        try {
+            Usuarios usuario = new Usuarios();
+            usuario.excluir(cpf);
+            return Response.ok().build(); 
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir o usuário").build();
+        }
     }
 }
