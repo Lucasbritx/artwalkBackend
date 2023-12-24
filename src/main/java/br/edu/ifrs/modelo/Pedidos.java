@@ -68,17 +68,17 @@ public void atualizar() throws Exception {
     }
 }
 
-public void excluir(String id) throws Exception {
+public void excluir(String numero) throws Exception {
     Connection con = null;
     PreparedStatement p = null;
 
     try {
         con = Conexao.pegarConexao();
+        p = con.prepareStatement("DELETE FROM produtos_has_pedidos WHERE pedidos_numero = ?");
+        p.setInt(1, Integer.parseInt(numero));
+        p.execute();
         p = con.prepareStatement("DELETE FROM pedidos WHERE numero = ?");
-        System.out.println(id);
-
-        p.setInt(1, Integer.parseInt(id));
-
+        p.setInt(1, Integer.parseInt(numero));
         p.execute();
     } catch (Exception e) {
         throw new Exception("[Pedidos.excluir] - Falha ao executar a operação de exclusão no banco de dados: " + e.getMessage());

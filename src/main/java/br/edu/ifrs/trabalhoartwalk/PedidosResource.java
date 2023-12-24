@@ -62,17 +62,16 @@ public class PedidosResource {
     
     /**
      * Método DELETE para excluir um pedido pelo numero.
-     * @param id numero do pedido a ser excluído.
+     * @param numero numero do pedido a ser excluído.
      * @return Resposta de sucesso ou falha.
      */
     @DELETE
-    @Path("{id}")
+    @Path("{numero}")
     @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response deletePedido(@PathParam("id") String id) {
+    public Response deletePedido(@PathParam("numero") String numero) {
         try {
             Pedidos pedido = new Pedidos();
-            System.out.println(id);
-            pedido.excluir(id);
+            pedido.excluir(numero);
             return Response.ok().build(); 
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir o pedido").build();
